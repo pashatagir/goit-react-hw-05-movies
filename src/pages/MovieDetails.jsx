@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { getMovieById } from 'moviesAPI';
 
 const MovieDetails = () => {
@@ -41,7 +41,9 @@ const MovieDetails = () => {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };

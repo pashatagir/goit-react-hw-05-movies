@@ -5,7 +5,7 @@ import {
 } from 'components/MoviesList.styled';
 import SearchBar from 'components/SearchBar';
 import { getMovieByName } from 'moviesAPI';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
@@ -40,7 +40,9 @@ const Movies = () => {
             </Link>
           </CardWrapper>
         ))}
-        <Outlet />
+        <Suspense>
+          <Outlet />
+        </Suspense>
       </Container>
     </main>
   );

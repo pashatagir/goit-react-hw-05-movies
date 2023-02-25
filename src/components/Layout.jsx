@@ -13,7 +13,7 @@ const Layout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
-      <Suspense fallback={<div>Loading page...</div>}>
+      <Suspense>
         <Outlet />
       </Suspense>
     </Container>
