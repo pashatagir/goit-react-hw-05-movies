@@ -30,7 +30,7 @@ const Movies = () => {
 
   return (
     <main>
-      <SearchBar value={movieName} onSubmit={handleFormSubmit} />
+      <SearchBar onSubmit={handleFormSubmit} />
       <Container>
         {movies.map(({ id, original_title, poster_path }) => (
           <CardWrapper key={id}>
@@ -56,4 +56,3 @@ const Movies = () => {
 };
 
 export default Movies;
-// src={poster_path?`https://image.tmdb.org/t/p/w342/${poster_path}`:`${notFound}`}

@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Container, CardWrapper, MovieName, Image } from './MoviesList.styled';
 import notFoundPoster from 'images/poster.jpg';
+import PropTypes from 'prop-types';
 
 export const MoviesList = ({ movies }) => {
   const location = useLocation();
@@ -23,4 +24,8 @@ export const MoviesList = ({ movies }) => {
       ))}
     </Container>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf.isRequired,
 };
