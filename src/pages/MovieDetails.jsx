@@ -11,6 +11,8 @@ import {
   ListLink,
   Link,
 } from './MoveDetails.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -18,17 +20,9 @@ const MovieDetails = () => {
   const location = useLocation();
 
   useEffect(() => {
-    getMovieById(movieId).then(
-      ({
-        id,
-        poster_path,
-        original_title,
-        overview,
-        release_date,
-        vote_average,
-        genres,
-      }) => {
-        setMovie({
+    getMovieById(movieId)
+      .then(
+        ({
           id,
           poster_path,
           original_title,
@@ -36,9 +30,21 @@ const MovieDetails = () => {
           release_date,
           vote_average,
           genres,
-        });
-      }
-    );
+        }) => {
+          setMovie({
+            id,
+            poster_path,
+            original_title,
+            overview,
+            release_date,
+            vote_average,
+            genres,
+          });
+        }
+      )
+      .catch(() =>
+        toast.error(`Whoops, something went wrong! Please try again later!`)
+      );
   }, [movieId]);
 
   const goBackLink = location?.state?.from ?? '/';
@@ -97,6 +103,7 @@ const MovieDetails = () => {
           </Suspense>
         </InfoWrapper>
       </CardWrapper>
+      <ToastContainer />
     </main>
   );
 };

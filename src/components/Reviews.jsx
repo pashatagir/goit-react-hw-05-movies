@@ -2,6 +2,8 @@ import { getMovieById } from 'moviesAPI';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Message } from './Cast.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const anApologyMessage = 'Sorry, but there are currently no reviews!';
 
@@ -9,9 +11,13 @@ const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    getMovieById(`${movieId}/reviews`).then(({ results }) => {
-      setReviews(results);
-    });
+    getMovieById(`${movieId}/reviews`)
+      .then(({ results }) => {
+        setReviews(results);
+      })
+      .catch(() =>
+        toast.error(`Whoops, something went wrong! Please try again later!`)
+      );
   }, [movieId]);
   return (
     <ul>
@@ -25,6 +31,7 @@ const Reviews = () => {
       ) : (
         <Message>{anApologyMessage}</Message>
       )}
+      <ToastContainer />
     </ul>
   );
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SearchForm, FormButton, FormInput } from './SearchBar.styled';
 import PropTypes from 'prop-types';
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar = ({ value, onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = e => {
@@ -11,6 +11,7 @@ const SearchBar = ({ onSubmit }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
+
     onSubmit(query);
     setQuery('');
   };

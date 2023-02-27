@@ -9,6 +9,8 @@ import {
   CastName,
   Message,
 } from './Cast.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const anApologyMessage =
   'Sorry, but there is currently no information about the cast!';
@@ -17,9 +19,13 @@ const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   useEffect(() => {
-    getMovieById(`${movieId}/credits`).then(({ cast }) => {
-      setCast(cast);
-    });
+    getMovieById(`${movieId}/credits`)
+      .then(({ cast }) => {
+        setCast(cast);
+      })
+      .catch(() =>
+        toast.error(`Whoops, something went wrong! Please try again later!`)
+      );
   }, [movieId]);
   return (
     <CastList>
@@ -42,6 +48,7 @@ const Cast = () => {
       ) : (
         <Message>{anApologyMessage}</Message>
       )}
+      <ToastContainer />
     </CastList>
   );
 };
