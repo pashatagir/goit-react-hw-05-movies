@@ -1,6 +1,16 @@
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { generatePath, Outlet, useLocation, useParams } from 'react-router-dom';
 import { Suspense, useEffect, useState } from 'react';
 import { getMovieById } from 'moviesAPI';
+import notFoundPoster from 'images/poster.jpg';
+import {
+  CardWrapper,
+  GoBackLink,
+  Image,
+  InfoWrapper,
+  ItemLink,
+  ListLink,
+  Link,
+} from './MoveDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -9,41 +19,84 @@ const MovieDetails = () => {
 
   useEffect(() => {
     getMovieById(movieId).then(
-      ({ poster_path, original_title, overview, release_date }) => {
-        setMovie({ poster_path, original_title, overview, release_date });
+      ({
+        id,
+        poster_path,
+        original_title,
+        overview,
+        release_date,
+        vote_average,
+        genres,
+      }) => {
+        setMovie({
+          id,
+          poster_path,
+          original_title,
+          overview,
+          release_date,
+          vote_average,
+          genres,
+        });
       }
     );
   }, [movieId]);
 
   const goBackLink = location?.state?.from ?? '/';
-  const { poster_path, original_title, overview, release_date } = movie;
+
+  const {
+    id,
+    poster_path,
+    original_title,
+    overview,
+    release_date,
+    vote_average,
+    genres,
+  } = movie;
 
   return (
     <main>
-      <Link to={goBackLink}>Go back</Link>
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+      <GoBackLink to={goBackLink}>Go back</GoBackLink>
+      <CardWrapper>
+        <Image
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+              : `${notFoundPoster}`
+          }
           alt={original_title}
         />
-        <div>
+        <InfoWrapper>
           <h2>
-            {original_title}({new Date(release_date).getFullYear()})
+            {original_title} ({new Date(release_date).getFullYear()})
           </h2>
+          <p>User scores: {Math.ceil(vote_average * 10)}%</p>
+          <h3>Overview</h3>
           <p>{overview}</p>
-        </div>
-      </div>
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
-      <Suspense>
-        <Outlet />
-      </Suspense>
+          <h3>Genres</h3>
+          <p>{genres?.map(genre => genre.name).join(', ')}</p>
+          <ListLink>
+            <ItemLink>
+              <Link
+                state={{ from: location?.state?.from }}
+                to={generatePath('cast', { id })}
+              >
+                Cast
+              </Link>
+            </ItemLink>
+            <ItemLink>
+              <Link
+                state={{ from: location?.state?.from }}
+                to={generatePath('reviews', { id })}
+              >
+                Reviews
+              </Link>
+            </ItemLink>
+          </ListLink>
+          <Suspense>
+            <Outlet />
+          </Suspense>
+        </InfoWrapper>
+      </CardWrapper>
     </main>
   );
 };

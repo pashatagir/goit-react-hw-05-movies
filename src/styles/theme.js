@@ -9,6 +9,7 @@ export const theme = Object.freeze({
     imageBackground: ['red', 'linear-gradient (90deg, #ff9966,#ff5e62'],
   },
   fontSizes: {
+    xs: '12px',
     small: '14px',
     medium: '18px',
     large: '22px',

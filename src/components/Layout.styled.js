@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -28,7 +28,11 @@ export const Link = styled(NavLink)`
   color: black;
   font-weight: 500;
 
+  &:hover {
+    color: ${props => props.theme.colors.white};
+  }
+
   &.active {
-    color: red;
+    color: ${props => props.theme.colors.accent};
   }
 `;

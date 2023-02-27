@@ -1,14 +1,20 @@
-import { Link } from 'react-router-dom';
-import { Container, CardWrapper, MovieName } from './MoviesList.styled';
+import { Link, useLocation } from 'react-router-dom';
+import { Container, CardWrapper, MovieName, Image } from './MoviesList.styled';
+import notFoundPoster from 'images/poster.jpg';
 
 export const MoviesList = ({ movies }) => {
+  const location = useLocation();
   return (
     <Container>
       {movies.map(({ id, original_title, poster_path }) => (
         <CardWrapper key={id}>
-          <Link to={`movies/${id}`}>
-            <img
-              src={`https://image.tmdb.org/t/p/w342/${poster_path}`}
+          <Link state={{ from: location }} to={`movies/${id}`}>
+            <Image
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+                  : `${notFoundPoster}`
+              }
               alt={original_title}
             />
             <MovieName>{original_title}</MovieName>
