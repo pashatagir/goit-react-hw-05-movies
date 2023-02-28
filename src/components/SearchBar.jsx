@@ -7,7 +7,7 @@ import {
 } from '../styles/SearchBar.styled';
 import PropTypes from 'prop-types';
 
-const SearchBar = ({ value, onSubmit }) => {
+const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = e => {
