@@ -8,7 +8,7 @@ import {
   CastList,
   CastName,
   Message,
-} from './Cast.styled';
+} from '../styles/Cast.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

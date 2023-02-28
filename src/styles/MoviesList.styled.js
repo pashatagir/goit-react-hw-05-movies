@@ -7,8 +7,9 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const CardWrapper = styled.div`
+export const CardsWrapper = styled.div`
   border: 1px solid ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.white};
   border-radius: 8px;
   transform: scale(1);
   &:hover {
@@ -16,15 +17,14 @@ export const CardWrapper = styled.div`
   }
 `;
 
-export const Image = styled.img`
+export const Images = styled.img`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 `;
 
 export const MovieName = styled.h3`
   padding: 4px;
-  margin-top: 8px;
-  margin-bottom: 0;
-  color: ${props => props.theme.colors.white};
+  margin: 0px;
+  color: ${props => props.theme.colors.black};
   text-align: center;
 `;

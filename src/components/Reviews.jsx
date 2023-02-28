@@ -1,7 +1,7 @@
 import { getMovieById } from 'moviesAPI';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Message } from './Cast.styled';
+import { Message } from '../styles/Cast.styled';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

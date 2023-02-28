@@ -1,9 +1,9 @@
 import {
-  CardWrapper,
+  CardsWrapper,
   MovieName,
   Container,
-  Image,
-} from 'components/MoviesList.styled';
+  Images,
+} from 'styles/MoviesList.styled';
 import SearchBar from 'components/SearchBar';
 import { getMovieByName } from 'moviesAPI';
 import { Suspense, useEffect, useState } from 'react';
@@ -39,9 +39,9 @@ const Movies = () => {
       <SearchBar onSubmit={handleFormSubmit} />
       <Container>
         {movies.map(({ id, original_title, poster_path }) => (
-          <CardWrapper key={id}>
+          <CardsWrapper key={id}>
             <Link state={{ from: location }} to={`${id}`}>
-              <Image
+              <Images
                 src={
                   poster_path
                     ? `https://image.tmdb.org/t/p/w342/${poster_path}`
@@ -51,7 +51,7 @@ const Movies = () => {
               />
               <MovieName>{original_title}</MovieName>
             </Link>
-          </CardWrapper>
+          </CardsWrapper>
         ))}
         <Suspense>
           <Outlet />

@@ -1,5 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Container, CardWrapper, MovieName, Image } from './MoviesList.styled';
+import {
+  Container,
+  CardsWrapper,
+  MovieName,
+  Images,
+} from '../styles/MoviesList.styled';
 import notFoundPoster from 'images/poster.jpg';
 import PropTypes from 'prop-types';
 
@@ -8,9 +13,9 @@ export const MoviesList = ({ movies }) => {
   return (
     <Container>
       {movies.map(({ id, original_title, poster_path }) => (
-        <CardWrapper key={id}>
+        <CardsWrapper key={id}>
           <Link state={{ from: location }} to={`movies/${id}`}>
-            <Image
+            <Images
               src={
                 poster_path
                   ? `https://image.tmdb.org/t/p/w342/${poster_path}`
@@ -20,7 +25,7 @@ export const MoviesList = ({ movies }) => {
             />
             <MovieName>{original_title}</MovieName>
           </Link>
-        </CardWrapper>
+        </CardsWrapper>
       ))}
     </Container>
   );

@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { SearchForm, FormButton, FormInput } from './SearchBar.styled';
+import {
+  SearchForm,
+  FormButton,
+  FormInput,
+  Icon,
+} from '../styles/SearchBar.styled';
 import PropTypes from 'prop-types';
 
 const SearchBar = ({ value, onSubmit }) => {
@@ -17,8 +22,15 @@ const SearchBar = ({ value, onSubmit }) => {
   };
   return (
     <SearchForm onSubmit={handleSubmit}>
-      <FormInput type="text" value={query} onChange={handleChange} />
-      <FormButton type="submit">Search</FormButton>
+      <FormInput
+        type="text"
+        value={query}
+        onChange={handleChange}
+        placeholder="Search movies..."
+      />
+      <FormButton type="submit">
+        <Icon />
+      </FormButton>
     </SearchForm>
   );
 };
